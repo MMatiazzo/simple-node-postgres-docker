@@ -1,0 +1,27 @@
+version: '3'
+services:
+  api:
+    depends_on:
+      - postgres
+    links:
+      - postgres
+    image: "mmatiazzo/fiap-docker-challenge"
+    ports:
+      - "3333:3333"
+    environment:
+      PG_USER: postgres
+      PG_HOST: postgres
+      PG_DATABASE: postgres
+      PG_PASSWORD: postgres_password
+      PG_PORT: 5432
+    volumes:
+      - /app/node_modules
+      - .:/app
+  postgres:
+    image: "postgres"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+      POSTGRES_PASSWORD: postgres_password
+    ports:
+      - "5432:5432"
